@@ -285,8 +285,8 @@ function terminarVenta($venta){
 
 function vender($venta){
 	$venta->cliente = (isset($venta->cliente)) ? $venta->cliente : 0;
-	$sentencia = "INSERT INTO ventas (fecha, total, pagado, idCliente, idUsuario) VALUES (?,?,?,?,?)";
-	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->pagado, $venta->cliente, $venta->usuario];
+	$sentencia = "INSERT INTO ventas (fecha, total, pagado, idCliente, idUsuario, descuento, terminos, observacion) VALUES (?,?,?,?,?,?,?,?)";
+	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->pagado, $venta->cliente, $venta->usuario, $venta->descuento, $venta->terminos, $venta->observacion];
 	$registrado = insertar($sentencia, $parametros);
 	
 	if(!$registrado) return false;
@@ -298,8 +298,8 @@ function vender($venta){
 }
 
 function agregarCuentaApartado($venta){
-	$sentencia = "INSERT INTO cuentas_apartados (fecha, total, pagado, porPagar, tipo, idCliente, idUsuario) VALUES (?,?,?,?,?,?,?)";
-	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->pagado, $venta->porPagar, $venta->tipo, $venta->cliente, $venta->usuario];
+	$sentencia = "INSERT INTO cuentas_apartados (fecha, total, pagado, porPagar, tipo, idCliente, idUsuario, descuento, terminos, observacion) VALUES (?,?,?,?,?,?,?,?,?,?)";
+	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->pagado, $venta->porPagar, $venta->tipo, $venta->cliente, $venta->usuario, $venta->descuento, $venta->terminos, $venta->observacion];
 
 	$registrado = insertar($sentencia, $parametros);
 	
@@ -312,8 +312,8 @@ function agregarCuentaApartado($venta){
 }
 
 function agregarCotizacion($venta){
-	$sentencia = "INSERT INTO cotizaciones(fecha, total, idCliente, idUsuario, descuento) VALUES (?,?,?,?,?)";
-	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->cliente, $venta->usuario, $venta->descuento];
+	$sentencia = "INSERT INTO cotizaciones(fecha, total, idCliente, idUsuario, descuento, terminos, observacion) VALUES (?,?,?,?,?,?,?)";
+	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->cliente, $venta->usuario, $venta->descuento, $venta->terminos, $venta->observacion];
 
 	$registrado = insertar($sentencia, $parametros);
 	$idCotizacion =  obtenerUltimoId('cotizaciones');

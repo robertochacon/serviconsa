@@ -15,7 +15,13 @@
 					<b-input step="any" ref="descuento" icon="currency-usd" type="number" placeholder="Descuento" v-model="descuento" size="is-medium"></b-input>
 				</b-field>
 				<busqueda-cliente @seleccionado="onSeleccionado"/>
-			</section>
+				<b-field label="Terminos" >
+					<textarea name="terminos" cols="30" placeholder="Terminos" v-model="terminos" rows="20" class="input is-medium" ></textarea>
+				</b-field>
+				<b-field label="Observacion" >
+					<textarea name="observacion" cols="30" placeholder="Observacion" v-model="observacion" rows="20" class="input is-medium" ></textarea>
+				</b-field>
+				</section>
 			<footer class="modal-card-foot">
 				<b-button
 					label="Cancelar"
@@ -42,7 +48,9 @@
 
 		data:()=>({
 			cliente: {},
-			descuento: 0
+			descuento: 0,
+			terminos: '',
+			observacion: ''
 		}),
 
 
@@ -64,7 +72,9 @@
 				let payload = {
 					tipo: 'cotiza',
 					cliente: this.cliente,
-					descuento: this.descuento
+					descuento: this.descuento,
+					terminos: this.terminos,
+					observacion: this.observacion
 				}
 
 				this.$emit("terminar", payload)

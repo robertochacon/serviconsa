@@ -9,12 +9,22 @@
 					@click="$emit('close', 'venta')"/>
 			</header>
 			<section class="modal-card-body">
-				<p class="is-size-1 has-text-weight-bold">Total ${{ totalVenta }}</p>
+				<p class="is-size-1 has-text-weight-bold">Total ${{ totalVenta - descuento }}</p>
 				<busqueda-cliente @seleccionado="onSeleccionado" />
 				<b-field label="El cliente paga con" >
 					<b-input step="any" ref="pagado" icon="currency-usd" type="number" placeholder="Monto pagado" v-model="pagado" @input="calcularCambio" @keyup.enter.native="terminarVenta" size="is-medium"></b-input>
 				</b-field>
-				<p class="is-size-1 has-text-weight-bold">Cambio ${{ cambio }}</p>
+				<p class="is-size-1 has-text-weight-bold">Cambio ${{ cambio - descuento }}</p>
+				<b-field label="Descuento" >
+					<b-input step="any" ref="descuento" icon="currency-usd" type="number" placeholder="Descuento" v-model="descuento" size="is-medium"></b-input>
+				</b-field>
+				<busqueda-cliente @seleccionado="onSeleccionado"/>
+				<b-field label="Terminos" >
+					<textarea name="terminos" cols="30" placeholder="Terminos" v-model="terminos" rows="20" class="input is-medium" ></textarea>
+				</b-field>
+				<b-field label="Observacion" >
+					<textarea name="observacion" cols="30" placeholder="Observacion" v-model="observacion" rows="20" class="input is-medium" ></textarea>
+				</b-field>
 			</section>
 			<footer class="modal-card-foot">
 				<b-button
@@ -43,7 +53,10 @@
 		data:()=>({
 			pagado: "",
 			cambio: 0,
-			cliente: {}
+			cliente: {},
+			descuento: 0,
+			terminos: '',
+			observacion: ''
 		}),
 
 		mounted(){
@@ -56,7 +69,11 @@
 			},
 
 			calcularCambio(){
-				this.cambio = parseFloat(this.pagado-this.totalVenta)
+				if(this.pagado>this.totalVenta){
+					this.cambio = parseFloat(this.pagado-this.totalVenta)
+				}else{
+					this.cambio = parseFloat(this.totalVenta-this.pagado)
+				}
 			},
 
 			terminarVenta(){
@@ -71,8 +88,11 @@
 				let payload = {
 					tipo: 'venta',
 					pagado: this.pagado,
-					cambio: this.cambio,
-					cliente: this.cliente
+					cambio: this.cambio-this.descuento,
+					cliente: this.cliente,
+					descuento: this.descuento,
+					terminos: this.terminos,
+					observacion: this.observacion
 				}
 
 				this.$emit("terminar", payload)
