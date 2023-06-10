@@ -12,6 +12,9 @@ import ReporteCotizaciones from '@/components/Ventas/ReporteCotizaciones'
 import ClientesComponent from '@/components/Clientes/ClientesComponent'
 import AgregarCliente from '@/components/Clientes/AgregarCliente'
 import EditarCliente from '@/components/Clientes/EditarCliente'
+import SuplidoresComponent from '@/components/Suplidores/SuplidoresComponent'
+import AgregarSuplidor from '@/components/Suplidores/AgregarSuplidor'
+import EditarSuplidor from '@/components/Suplidores/EditarSuplidor'
 import UsuariosComponent from '@/components/Usuarios/UsuariosComponent'
 import AgregarUsuario from '@/components/Usuarios/AgregarUsuario'
 import EditarUsuario from '@/components/Usuarios/EditarUsuario'
@@ -86,6 +89,21 @@ const routes = [{
         path: '/editar-cliente/:id',
         name: 'EditarCliente',
         component: EditarCliente
+    },
+    {
+        path: '/suplidores',
+        name: 'SuplidoresComponent',
+        component: SuplidoresComponent
+    },
+    {
+        path: '/agregar-suplidor',
+        name: 'AgregarSuplidor',
+        component: AgregarSuplidor
+    },
+    {
+        path: '/editar-suplidor/:id',
+        name: 'EditarSuplidor',
+        component: EditarSuplidor
     },
     {
         path: '/usuarios',

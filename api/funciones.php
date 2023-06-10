@@ -700,6 +700,53 @@ function verificarSiCategoriaEstaRegistrada($nombreCategoria){
 }
 
 /*
+------------------------------------------------------------------------------------
+						Suplidores
+------------------------------------------------------------------------------------
+*/
+
+function obtenerSuplidoresPorNombre($nombre){
+	$sentencia = "SELECT * FROM suplidores WHERE nombre LIKE ?";
+	$parametros = ["%".$nombre."%"];
+	return selectPrepare($sentencia, $parametros);
+}
+
+function obtenerSuplidores(){
+	$sentencia = "SELECT * FROM suplidores";
+	return selectQuery($sentencia);
+}
+
+function registrarSuplidor($suplidor){
+	$sentencia = "INSERT INTO suplidores (nombre, telefono) VALUES (?,?)";
+	$parametros = [$suplidor->nombre, $suplidor->telefono];
+	return insertar($sentencia, $parametros);
+}
+
+function obtenerSuplidorPorId($id){
+	$sentencia = "SELECT * FROM suplidores WHERE id = ?";
+	return selectRegresandoObjeto($sentencia, [$id]);
+}
+
+function editarSuplidor($suplidor){
+	$sentencia = "UPDATE suplidores SET nombre = ?, telefono = ? WHERE id = ?";
+	$parametros = [$suplidor->nombre, $suplidor->telefono, $suplidor->id];
+	return editar($sentencia, $parametros);
+}
+
+function eliminarSuplidor($id){
+	$sentencia = "DELETE FROM suplidores WHERE id = ?";
+	return eliminar($sentencia, $id);
+}
+
+/*
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+*/
+
+
+/*
 
  ______   _______ 
 |      | |  _    |

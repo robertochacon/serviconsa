@@ -98,6 +98,15 @@
                 Clientes
             </b-navbar-item>
 
+            <b-navbar-item  tag="router-link" :to="{ path: '/suplidores' }">
+                <b-icon
+                    icon="account-supervisor"
+                    size="is-medium">
+                </b-icon>
+                <span></span>
+                Suplidores
+            </b-navbar-item>
+
         </template>
 
         <template #end>
