@@ -740,6 +740,45 @@ function eliminarSuplidor($id){
 
 /*
 ------------------------------------------------------------------------------------
+						Gastos
+------------------------------------------------------------------------------------
+*/
+
+function obtenerGastosPorNombre($descripcion){
+	$sentencia = "SELECT * FROM gastos WHERE descripcion LIKE ?";
+	$parametros = ["%".$descripcion."%"];
+	return selectPrepare($sentencia, $parametros);
+}
+
+function obtenerGastos(){
+	$sentencia = "SELECT * FROM gastos";
+	return selectQuery($sentencia);
+}
+
+function registrargasto($gasto){
+	$sentencia = "INSERT INTO gastos (descripcion, monto, fijo, fecha) VALUES (?,?,?,?)";
+	$parametros = [$gasto->descripcion, $gasto->monto, $gasto->fijo, date("Y-m-d H:i:s")];
+	return insertar($sentencia, $parametros);
+}
+
+function obtenergastoPorId($id){
+	$sentencia = "SELECT * FROM gastos WHERE id = ?";
+	return selectRegresandoObjeto($sentencia, [$id]);
+}
+
+function editargasto($gasto){
+	$sentencia = "UPDATE gastos SET descripcion = ?, monto = ?, fijo = ?, fecha = ? WHERE id = ?";
+	$parametros = [$gasto->descripcion, $gasto->monto, $gasto->fijo, date("Y-m-d H:i:s"), $gasto->id];
+	return editar($sentencia, $parametros);
+}
+
+function eliminargasto($id){
+	$sentencia = "DELETE FROM gastos WHERE id = ?";
+	return eliminar($sentencia, $id);
+}
+
+/*
+------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
