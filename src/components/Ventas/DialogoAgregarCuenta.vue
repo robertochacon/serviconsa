@@ -18,7 +18,6 @@
 				<b-field label="Descuento" >
 					<b-input step="any" ref="descuento" icon="currency-usd" type="number" placeholder="Descuento" v-model="descuento" size="is-medium"></b-input>
 				</b-field>
-				<busqueda-cliente @seleccionado="onSeleccionado"/>
 				<b-field label="Terminos" >
 					<textarea name="terminos" cols="30" placeholder="Terminos" v-model="terminos" rows="20" class="input is-medium" ></textarea>
 				</b-field>
@@ -71,11 +70,7 @@
 
 
 			calcularRestante(){
-				if(this.porPagar>this.totalVenta){
-					this.porPagar = parseFloat(this.totalVenta-this.pagado-this.descuento)
-				}else{
-					this.porPagar = parseFloat(this.totalVenta+this.pagado-this.descuento)
-				}
+				this.porPagar = parseFloat(this.totalVenta-this.pagado-this.descuento)
 			},
 
 			agregarCuenta(){

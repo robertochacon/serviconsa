@@ -14,11 +14,10 @@
 				<b-field label="El cliente paga con" >
 					<b-input step="any" ref="pagado" icon="currency-usd" type="number" placeholder="Monto pagado" v-model="pagado" @input="calcularCambio" @keyup.enter.native="terminarVenta" size="is-medium"></b-input>
 				</b-field>
-				<p class="is-size-1 has-text-weight-bold">Cambio ${{ cambio - descuento }}</p>
+				<p class="is-size-1 has-text-weight-bold">Cambio ${{ cambio + descuento }}</p>
 				<b-field label="Descuento" >
 					<b-input step="any" ref="descuento" icon="currency-usd" type="number" placeholder="Descuento" v-model="descuento" size="is-medium"></b-input>
 				</b-field>
-				<busqueda-cliente @seleccionado="onSeleccionado"/>
 				<b-field label="Terminos" >
 					<textarea name="terminos" cols="30" placeholder="Terminos" v-model="terminos" rows="20" class="input is-medium" ></textarea>
 				</b-field>
@@ -88,7 +87,7 @@
 				let payload = {
 					tipo: 'venta',
 					pagado: this.pagado,
-					cambio: this.cambio-this.descuento,
+					cambio: this.cambio+this.descuento,
 					cliente: this.cliente,
 					descuento: this.descuento,
 					terminos: this.terminos,

@@ -103,6 +103,8 @@ aria-modal>
         this.ventaRealizada = {
           total: this.total-venta.descuento,
           descuento: venta.descuento,
+          terminos: venta.terminos,
+          observacion: venta.observacion,
           productos: this.productos,
           cliente: venta.cliente.id,
           usuario: AyudanteSesion.obtenerDatosSesion().id,
