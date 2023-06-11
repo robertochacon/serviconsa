@@ -107,6 +107,15 @@
                 Suplidores
             </b-navbar-item>
 
+            <b-navbar-item  tag="router-link" :to="{ path: '/renta-equipos' }">
+                <b-icon
+                    icon="account-supervisor"
+                    size="is-medium">
+                </b-icon>
+                <span></span>
+                Renta de equipos
+            </b-navbar-item>
+
         </template>
 
         <template #end>

@@ -15,6 +15,9 @@ import EditarCliente from '@/components/Clientes/EditarCliente'
 import SuplidoresComponent from '@/components/Suplidores/SuplidoresComponent'
 import AgregarSuplidor from '@/components/Suplidores/AgregarSuplidor'
 import EditarSuplidor from '@/components/Suplidores/EditarSuplidor'
+import EquipoComponent from '@/components/RentaEquipo/EquipoComponent'
+import AgregarEquipo from '@/components/RentaEquipo/AgregarEquipo'
+import EditarEquipo from '@/components/RentaEquipo/EditarEquipo'
 import UsuariosComponent from '@/components/Usuarios/UsuariosComponent'
 import AgregarUsuario from '@/components/Usuarios/AgregarUsuario'
 import EditarUsuario from '@/components/Usuarios/EditarUsuario'
@@ -104,6 +107,21 @@ const routes = [{
         path: '/editar-suplidor/:id',
         name: 'EditarSuplidor',
         component: EditarSuplidor
+    },
+    {
+        path: '/renta-equipos',
+        name: 'EquipoComponent',
+        component: EquipoComponent
+    },
+    {
+        path: '/agregar-renta-equipo',
+        name: 'AgregarEquipo',
+        component: AgregarEquipo
+    },
+    {
+        path: '/editar-renta-equipo/:id',
+        name: 'EditarRentaEquipo',
+        component: EditarEquipo
     },
     {
         path: '/usuarios',

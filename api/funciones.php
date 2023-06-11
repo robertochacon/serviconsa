@@ -779,6 +779,45 @@ function eliminargasto($id){
 
 /*
 ------------------------------------------------------------------------------------
+						Renta de equipo
+------------------------------------------------------------------------------------
+*/
+
+function obtenerRentaEquipoPorNombre($nombre){
+	$sentencia = "SELECT * FROM renta_equipo WHERE nombre LIKE ?";
+	$parametros = ["%".$nombre."%"];
+	return selectPrepare($sentencia, $parametros);
+}
+
+function obtenerRentaEquipos(){
+	$sentencia = "SELECT * FROM renta_equipo";
+	return selectQuery($sentencia);
+}
+
+function registrarRentaEquipo($RentaEquipo){
+	$sentencia = "INSERT INTO renta_equipo (nombre, suplidor, costo, fecha) VALUES (?,?,?,?)";
+	$parametros = [$RentaEquipo->nombre, $RentaEquipo->suplidor, $RentaEquipo->costo, date("Y-m-d H:i:s")];
+	return insertar($sentencia, $parametros);
+}
+
+function obtenerRentaEquipoPorId($id){
+	$sentencia = "SELECT * FROM renta_equipo WHERE id = ?";
+	return selectRegresandoObjeto($sentencia, [$id]);
+}
+
+function editarRentaEquipo($RentaEquipo){
+	$sentencia = "UPDATE renta_equipo SET nombre = ?, suplidor = ?, costo = ?, fecha = ?, estado = ? WHERE id = ?";
+	$parametros = [$RentaEquipo->nombre, $RentaEquipo->suplidor, $RentaEquipo->costo, date("Y-m-d H:i:s"), $RentaEquipo->estado, $RentaEquipo->id];
+	return editar($sentencia, $parametros);
+}
+
+function eliminarRentaEquipo($id){
+	$sentencia = "DELETE FROM renta_equipo WHERE id = ?";
+	return eliminar($sentencia, $id);
+}
+
+/*
+------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
