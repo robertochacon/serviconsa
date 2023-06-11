@@ -45,7 +45,9 @@
 		}),
 
 		mounted(){
-			this.descripcion = this.description
+			this.datosGasto.id = this.gasto.id,
+			this.datosGasto.descripcion = this.gasto.descripcion
+			this.datosGasto.monto = this.gasto.monto
 		},
 
 		methods:{

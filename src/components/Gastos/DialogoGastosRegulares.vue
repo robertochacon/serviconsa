@@ -2,15 +2,18 @@
 	<form action="">
 		<div class="modal-card" style="width: 600px">
 			<header class="modal-card-head">
-				<p class="modal-card-title">{{ titulo }} marca</p>
+				<p class="modal-card-title">{{ titulo }} Gasto Fijo</p>
 				<button
 					type="button"
 					class="delete"
 					@click="$emit('close')"/>
 			</header>
 			<section class="modal-card-body">
-				<b-field label="Nombre de la marca" >
-					<b-input  type="text" placeholder="Ej. Pelikan" v-model="nombreMarca"></b-input>
+				<b-field label="Descripcion" >
+					<b-input  type="text" placeholder="Pago de luz" v-model="datosGasto.descripcion"></b-input>
+				</b-field>
+				<b-field label="monto" >
+					<b-input  type="number" placeholder="0.00" v-model="datosGasto.monto"></b-input>
 				</b-field>
 			</section>
 			<footer class="modal-card-foot">
@@ -30,29 +33,35 @@
 </template>
 <script>
 	export default{
-		name: "DialogoMarcas",
-		props: ['titulo', 'nombre'],
+		name: "DialogoGastosRegulares",
+		props: ['titulo', 'gasto'],
 
 		data:()=>({
-			nombreMarca: "",
+			datosGasto:{
+				descripcion: "",
+				monto: 0,
+				fijo: 1,
+			}
 		}),
 
 		mounted(){
-			this.nombreMarca = this.nombre
+			this.datosGasto.id = this.gasto.id,
+			this.datosGasto.descripcion = this.gasto.descripcion
+			this.datosGasto.monto = this.gasto.monto
 		},
 
 		methods:{
 
 			registrar(){
-				if(!this.nombreMarca){
+				if(!this.datosGasto.descripcion){
 					this.$buefy.toast.open({
                         type: 'is-danger',
-                        message: 'Debes colocar el nombre de la marca.'
+                        message: 'Debes colocar una descripcion.'
                     })
 					return
 				}
 
-				this.$emit("registrar", this.nombreMarca)
+				this.$emit("registrar", this.datosGasto)
 			}	
 		}
 	}

@@ -772,7 +772,7 @@ function obtenergastoPorId($id){
 	return selectRegresandoObjeto($sentencia, [$id]);
 }
 
-function editargasto($gasto){
+function editarGasto($gasto){
 	$sentencia = "UPDATE gastos SET descripcion = ?, monto = ?, fecha = ? WHERE id = ?";
 	$parametros = [$gasto->descripcion, $gasto->monto, date("Y-m-d H:i:s"), $gasto->id];
 	return editar($sentencia, $parametros);

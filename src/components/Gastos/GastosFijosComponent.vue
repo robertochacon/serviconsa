@@ -65,19 +65,19 @@
 		},
 
 		methods: {
-			eliminar(categoria){
+			eliminar(gasto){
 				this.$buefy.dialog.confirm({
-					title: 'Eliminar categoría',
-					message: 'Seguro que quieres <b>eliminar</b> la categoría ' + categoria.nombreCategoria +'? Esta acción no se puede revertir.',
+					title: 'Eliminar gasto',
+					message: 'Seguro que quieres <b>eliminar</b> este registro? Esta acción no se puede revertir.',
 					confirmText: 'Sí, eliminar',
 					cancelText: 'Cancelar',
 					type: 'is-danger',
 					hasIcon: true,
 					onConfirm: () => {
 						this.cargando = true
-						HttpService.eliminar('categorias.php',{
+						HttpService.eliminar('gastos.php',{
 							accion: 'eliminar',
-							id: categoria.id
+							id: gasto.id
 						})
 						.then(resultado => {
 							if(!resultado) {
@@ -103,6 +103,7 @@
 				this.tituloModal = "Editar"
 				this.mostrarDialogoGastoFijo = true
 				this.idGasto = gasto.id
+				this.datosGasto.id = gasto.id,
 				this.datosGasto.descripcion = gasto.descripcion,
 				this.datosGasto.monto = gasto.monto
 			}, 
@@ -129,7 +130,10 @@
 							message: 'Información de gasto registrada con éxito.'
 						})
 						this.obtenerGastos()
-						this.nombreCategoria = ""
+						this.idGasto = 0
+						this.datosGasto.id = 0
+						this.datosGasto.descripcion = ''
+						this.datosGasto.monto = 0
 						this.mostrarDialogoGastoFijo = false
 					}
 				})
@@ -137,6 +141,10 @@
 
 			agregarCategoria(){
 				this.tituloModal = "Agregar"
+				this.idGasto = 0
+				this.datosGasto.id = 0
+				this.datosGasto.descripcion = ''
+				this.datosGasto.monto = 0
 				this.mostrarDialogoGastoFijo = true
 			},
 
