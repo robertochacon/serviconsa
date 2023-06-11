@@ -18,6 +18,9 @@ import EditarSuplidor from '@/components/Suplidores/EditarSuplidor'
 import EquipoComponent from '@/components/RentaEquipo/EquipoComponent'
 import AgregarEquipo from '@/components/RentaEquipo/AgregarEquipo'
 import EditarEquipo from '@/components/RentaEquipo/EditarEquipo'
+
+import GastosComponent from '@/components/Gastos/GastosComponent'
+
 import UsuariosComponent from '@/components/Usuarios/UsuariosComponent'
 import AgregarUsuario from '@/components/Usuarios/AgregarUsuario'
 import EditarUsuario from '@/components/Usuarios/EditarUsuario'
@@ -78,6 +81,14 @@ const routes = [{
         name: 'ReporteCotizaciones',
         component: ReporteCotizaciones
     },
+
+    {
+        path: '/gastos',
+        name: 'GastosComponent',
+        component: GastosComponent
+    },
+
+
     {
         path: '/clientes',
         name: 'ClientesComponent',

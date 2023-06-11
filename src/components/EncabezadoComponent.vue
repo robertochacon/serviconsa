@@ -81,39 +81,58 @@
                 </b-navbar-dropdown>
             </b-navbar-item>
 
-            <b-navbar-item  tag="router-link" :to="{ path: '/usuarios' }" v-if="usuario == 'admin'">
+            <b-navbar-item>
                 <b-icon
-                    icon="account"
-                    size="is-medium">
+                icon="file-chart-outline"
+                size="is-medium"
+                class="is-pulled-left">
                 </b-icon>
-                <span></span>
-                Usuarios
-            </b-navbar-item>
-            <b-navbar-item  tag="router-link" :to="{ path: '/clientes' }">
-                <b-icon
-                    icon="account-supervisor"
-                    size="is-medium">
-                </b-icon>
-                <span></span>
-                Clientes
-            </b-navbar-item>
+                <b-navbar-dropdown label="Mas" icon="home">
+                    <b-navbar-item  tag="router-link" :to="{ path: '/gastos' }" v-if="usuario == 'admin'">
+                        <b-icon
+                            icon="book"
+                            size="is-medium">
+                        </b-icon>
+                        <span></span>
+                        Gastos
+                    </b-navbar-item>
 
-            <b-navbar-item  tag="router-link" :to="{ path: '/suplidores' }">
-                <b-icon
-                    icon="account-supervisor"
-                    size="is-medium">
-                </b-icon>
-                <span></span>
-                Suplidores
-            </b-navbar-item>
+                    <b-navbar-item  tag="router-link" :to="{ path: '/usuarios' }" v-if="usuario == 'admin'">
+                        <b-icon
+                            icon="account"
+                            size="is-medium">
+                        </b-icon>
+                        <span></span>
+                        Usuarios
+                    </b-navbar-item>
+                    <b-navbar-item  tag="router-link" :to="{ path: '/clientes' }">
+                        <b-icon
+                            icon="account-supervisor"
+                            size="is-medium">
+                        </b-icon>
+                        <span></span>
+                        Clientes
+                    </b-navbar-item>
 
-            <b-navbar-item  tag="router-link" :to="{ path: '/renta-equipos' }">
-                <b-icon
-                    icon="account-supervisor"
-                    size="is-medium">
-                </b-icon>
-                <span></span>
-                Renta de equipos
+                    <b-navbar-item  tag="router-link" :to="{ path: '/suplidores' }">
+                        <b-icon
+                            icon="truck"
+                            size="is-medium">
+                        </b-icon>
+                        <span></span>
+                        Suplidores
+                    </b-navbar-item>
+
+                    <b-navbar-item  tag="router-link" :to="{ path: '/renta-equipos' }">
+                        <b-icon
+                            icon="handshake"
+                            size="is-medium">
+                        </b-icon>
+                        <span></span>
+                        Renta de equipos
+                    </b-navbar-item>
+
+                </b-navbar-dropdown>
             </b-navbar-item>
 
         </template>

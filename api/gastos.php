@@ -16,8 +16,12 @@ switch ($accion) {
 		echo json_encode(registrarGasto($payload->gasto));
 		break;
 
-	case 'obtener':
-		echo json_encode(obtenerGastos());
+	case 'obtenerFijos':
+		echo json_encode(obtenerGastosFijos());
+		break;
+
+	case 'obtenerRegulares':
+		echo json_encode(obtenerGastosRegulares());
 		break;
 	
 	case 'obtener_por_nombre':
