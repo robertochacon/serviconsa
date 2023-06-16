@@ -1,22 +1,38 @@
 <template>
     <section>
-        <div class="comprobante" id="comprobante" v-if="datosNegocio">
-            <p><b>{{ titulo }}</b></p>
-            <p>{{ datosNegocio.nombre }} 
-            <br>Tel: {{ datosNegocio.telefono }}</p>
-            <img src="@/assets/logo.png" alt="logo" width="100">
-            <p style="text-align: left;"><b>Cliente:</b>{{ venta.nombreCliente }}</p>
-            <p style="text-align: left;"><b>Atiende:</b>{{ venta.nombreUsuario }}</p>
-            <p style="text-align: left;"><b>Fecha: </b>{{ venta.fecha }}</p>
+        <div class="comprobante" id="comprobante" v-if="datosNegocio" style="width:100%;">
+            <div style="width:100%;display: flex;">
+                <div style="width:50%;display: blok;justify-content: start;">
+                    <img src="@/assets/logo.png" alt="logo" width="100">
+                    <p>{{ datosNegocio.nombre }} 
+                    <br>Tel: {{ datosNegocio.telefono }}</p>
+                    <p style="text-align: left;"><b>Cliente:</b>{{ venta.nombreCliente }}</p>
+                    <p style="text-align: left;"><b>Atiende:</b>{{ venta.nombreUsuario }}</p>
+                </div>
+                <div style="width:50%;display: flex;flex-wrap: wrap;justify-content: end;">
+                    <h1 style="display: block;">Cotizacion</h1><br>
+                    <p style="display: block;"><b>No. 0000001 </b></p>
+                    <p style="display: block;"><b>Fecha: </b>{{ venta.fecha }}</p>
+                </div>
+            </div>
+            <!-- <p><b>{{ titulo }}</b></p> -->
+
             <table width="100%" style="margin:auto;border:1px solid black;">
-                <thead style="text-align: left;border: 1px solid black;">
-                    <th>Producto</th>
-                    <!-- <th></th> -->
-                    <th>Total</th>
+                <thead style="text-align: left;border: 1px solid black;" border="1">
+                    <th>Articulo</th>
+                    <th>Descripcion</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Descuento</th>
+                    <th>Subtotal</th>
                 </thead>
                 <tbody>
                     <tr v-for="(producto, index) in venta.productos" :key="index">
+                        <td>{{ producto.id }}</td>
                         <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.cantidad }}</td>
+                        <td>${{ producto.precio}}</td>
+                        <td>${{ (producto.descuento!=null)?producto.descuento:'0.00' }}</td>
                         <!-- <td>${{ producto.precio}} X {{ producto.cantidad }}</td> -->
                         <td>${{ producto.precio * producto.cantidad }}</td>
                     </tr>
@@ -134,7 +150,7 @@
 </script>
 <style scoped>
     .comprobante{
-        width: 250px;
+        width: 100%;
         font-family: monospace;
         font-size: 14px;
     }
@@ -155,6 +171,17 @@
       font-size: 12px !important;
       margin: 0!important;
       padding: 0!important;
+    }
+
+    .row{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
     }
     
 </style>

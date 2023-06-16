@@ -8,7 +8,7 @@
     <b-breadcrumb-item active>Gastos</b-breadcrumb-item>
   </b-breadcrumb>
   <b-tabs v-model="tabActiva" size="is-large">
-    <b-tab-item label="Gastos regulares" icon="sack">
+    <b-tab-item label="Gastos regulares" icon="sacka">
       <GastosRegularesComponent/>
     </b-tab-item>
 
