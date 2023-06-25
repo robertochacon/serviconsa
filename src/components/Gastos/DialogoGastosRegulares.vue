@@ -2,7 +2,7 @@
 	<form action="">
 		<div class="modal-card" style="width: 600px">
 			<header class="modal-card-head">
-				<p class="modal-card-title">{{ titulo }} Gasto Fijo</p>
+				<p class="modal-card-title">{{ titulo }} Gasto Regular</p>
 				<button
 					type="button"
 					class="delete"

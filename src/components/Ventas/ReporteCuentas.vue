@@ -56,6 +56,12 @@
             
             onGenerarComprobante(cuenta){
                 this.cuentaSeleccionada = cuenta
+                if(cuenta.impuesto){
+                    cuenta.impuesto_numero = (0.18*cuenta.total)
+                }else{
+                    cuenta.impuesto_numero = 0
+                }
+                cuenta.subtotal = cuenta.total - cuenta.impuesto_numero;
                 this.mostrarComprobante = true
             },
 

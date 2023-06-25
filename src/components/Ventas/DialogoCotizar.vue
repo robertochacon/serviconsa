@@ -1,6 +1,6 @@
 <template>
 	<form action="">
-		<div class="modal-card" style="width: 600px">
+		<div class="modal-card" style="width: 100%">
 			<header class="modal-card-head has-background-warning">
 				<p class="modal-card-title ">Agregar cotizacion</p>
 				<button
@@ -11,9 +11,18 @@
 			<section class="modal-card-body">
 				<p class="is-size-1 has-text-weight-bold">Total ${{ totalVenta - descuento }}</p>
 				<p class="is-size-4 has-text-weight-bold" style="color:red;">Descuento de ${{ descuento }}</p>
-				<b-field label="Descuento" >
-					<b-input step="any" ref="descuento" icon="currency-usd" type="number" placeholder="Descuento" v-model="descuento" size="is-medium"></b-input>
-				</b-field>
+				<div class="columns">
+					<div class="column is-6">
+						<b-field label="Descuento" >
+							<b-input step="any" ref="descuento" icon="currency-usd" type="number" placeholder="Descuento" v-model="descuento" size="is-medium"></b-input>
+						</b-field>
+					</div>
+					<div class="column is-6">
+						<b-field label="Aplicar impuesto">
+							<b-switch v-model="impuesto"></b-switch>
+						</b-field>
+					</div>
+				</div>
 				<busqueda-cliente @seleccionado="onSeleccionado"/>
 				<b-field label="Terminos" >
 					<textarea name="terminos" cols="30" placeholder="Terminos" v-model="terminos" rows="20" class="input is-medium" ></textarea>
@@ -49,6 +58,7 @@
 		data:()=>({
 			cliente: {},
 			descuento: 0,
+			impuesto: 0,
 			terminos: '',
 			observacion: ''
 		}),
@@ -73,6 +83,7 @@
 					tipo: 'cotiza',
 					cliente: this.cliente,
 					descuento: this.descuento,
+					impuesto: this.impuesto,
 					terminos: this.terminos,
 					observacion: this.observacion
 				}

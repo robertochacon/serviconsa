@@ -124,6 +124,12 @@
             
             generarComprobante(cotizacion){
                 this.cotizacionSeleccionada = cotizacion
+                if(cotizacion.impuesto){
+                    cotizacion.impuesto_numero = (0.18*cotizacion.total)
+                }else{
+                    cotizacion.impuesto_numero = 0
+                }
+                cotizacion.subtotal = cotizacion.total - cotizacion.impuesto_numero;
                 this.mostrarComprobante = true
             },
 

@@ -57,6 +57,12 @@
             
             onGenerarComprobante(apartado){
                 this.apartadoSeleccionado = apartado
+                if(apartado.impuesto){
+                    apartado.impuesto_numero = (0.18*apartado.total)
+                }else{
+                    apartado.impuesto_numero = 0
+                }
+                apartado.subtotal = apartado.total - apartado.impuesto_numero;
                 this.mostrarComprobante = true
             },
 

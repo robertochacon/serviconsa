@@ -101,16 +101,25 @@ aria-modal>
 
       onTerminar(venta){
         this.ventaRealizada = {
+          subtotal: this.total-venta.descuento,
           total: this.total-venta.descuento,
           descuento: venta.descuento,
           terminos: venta.terminos,
           observacion: venta.observacion,
+          impuesto: venta.impuesto,
           productos: this.productos,
           cliente: venta.cliente.id,
           usuario: AyudanteSesion.obtenerDatosSesion().id,
           nombreCliente: (venta.cliente.nombre) ? venta.cliente.nombre : 'MOSTRADOR',
           nombreUsuario: AyudanteSesion.obtenerDatosSesion().usuario,
           fecha: new Date().toJSON().slice(0,10).replace(/-/g,'/')
+        }
+
+        if(venta.impuesto){
+          this.ventaRealizada.impuesto_numero = (.18*this.total)
+          this.ventaRealizada.total = this.total+(.18*this.total);
+        }else{
+          this.ventaRealizada.impuesto_numero = 0
         }
 
         let tipo = venta.tipo

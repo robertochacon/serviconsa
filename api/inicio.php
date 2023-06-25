@@ -15,12 +15,15 @@ switch ($accion) {
 	case 'obtener_ingresos':
 		echo json_encode(
 			[
-
+				
 				"totalIngresos" => calcularTotalIngresos(),
 				"ingresosHoy" => calcularTotalIngresosHoy(),
 				"ingresosSemana" => calcularTotalIngresosSemana(),
 				"ingresosMes" => calcularTotalIngresosMes(),
-				"ingresosPendientes" => calcularIngresosPendientes()
+				"ingresosPendientes" => calcularIngresosPendientes(),
+				"totalGastos" => calcularTotalIngresosGastos(),
+				"totalGastosFijos" => calcularTotalIngresosGastosFijos(),
+				"totalRentaEquipos" => calcularTotalIngresosRentaEquipos(),
 				
 			]
 		);

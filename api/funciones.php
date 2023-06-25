@@ -118,6 +118,21 @@ function calcularIngresosPendientes(){
 	return selectRegresandoObjeto($sentencia)->pendientes;
 }
 
+function calcularTotalIngresosGastos(){
+	$sentencia = "SELECT MONTH(fecha) as fecha, SUM(monto) FROM gastos WHERE fijo = 0 GROUP BY MONTH(fecha) ORDER BY id ASC";
+	return selectRegresandoObjeto($sentencia)->totalIngresos;
+}
+
+function calcularTotalIngresosGastosFijos(){
+	$sentencia = "SELECT SUM(monto) FROM gastos WHERE fijo = 1 ORDER BY id ASC";
+	return selectRegresandoObjeto($sentencia)->totalIngresos;
+}
+
+function calcularTotalIngresosRentaEquipos(){
+	$sentencia = "SELECT SUM(costo) FROM renta_equipo";
+	return selectRegresandoObjeto($sentencia)->totalIngresos;
+}
+
 function eliminarCotizacion($id){
 	$sentenciaEliminarCotizacion = "DELETE FROM cotizaciones WHERE id = ?";
 	$cotizacionEliminada = eliminar($sentenciaEliminarCotizacion, $id);
@@ -189,7 +204,7 @@ function obtenerPagosCuentasApartados($filtros, $tipo){
 }
 
 function obtenerCuentasApartados($filtros, $tipo){
-	$sentencia = "SELECT cuentas_apartados.id, cuentas_apartados.fecha, cuentas_apartados.total, cuentas_apartados.pagado, cuentas_apartados.porPagar, IFNULL(clientes.nombre, 'MOSTRADOR') AS nombreCliente, IFNULL(usuarios.usuario, 'NO ENCONTRADO') AS nombreUsuario 
+	$sentencia = "SELECT cuentas_apartados.id, cuentas_apartados.fecha, cuentas_apartados.total, cuentas_apartados.terminos, cuentas_apartados.observacion, cuentas_apartados.impuesto, cuentas_apartados.pagado, cuentas_apartados.porPagar, IFNULL(clientes.nombre, 'MOSTRADOR') AS nombreCliente, IFNULL(usuarios.usuario, 'NO ENCONTRADO') AS nombreUsuario 
 		FROM cuentas_apartados
 		LEFT JOIN clientes ON clientes.id = cuentas_apartados.idCliente
 		LEFT JOIN usuarios ON usuarios.id = cuentas_apartados.idUsuario
@@ -208,7 +223,7 @@ function obtenerCuentasApartados($filtros, $tipo){
 }
 
 function obtenerCotizaciones($filtros, $tipo){
-	$sentencia = "SELECT cotizaciones.id, cotizaciones.fecha, cotizaciones.total, IFNULL(clientes.nombre, 'MOSTRADOR') AS nombreCliente, IFNULL(usuarios.usuario, 'NO ENCONTRADO') AS nombreUsuario 
+	$sentencia = "SELECT cotizaciones.id, cotizaciones.fecha, cotizaciones.total, cotizaciones.terminos, cotizaciones.observacion, cotizaciones.impuesto, IFNULL(clientes.nombre, 'MOSTRADOR') AS nombreCliente, IFNULL(usuarios.usuario, 'NO ENCONTRADO') AS nombreUsuario 
 		FROM cotizaciones
 		LEFT JOIN clientes ON clientes.id = cotizaciones.idCliente
 		LEFT JOIN usuarios ON usuarios.id = cotizaciones.idUsuario 
@@ -229,7 +244,7 @@ function obtenerCotizaciones($filtros, $tipo){
 function obtenerVentas($filtros){
 	$fechaInicio = ($filtros->fechaInicio === "") ? FECHA_HOY : $filtros->fechaInicio;
 	$fechaFin = ($filtros->fechaFin === "") ? FECHA_HOY : $filtros->fechaFin;
-	$sentencia = "SELECT ventas.id, ventas.fecha, ventas.total, ventas.pagado, IFNULL(clientes.nombre, 'MOSTRADOR') AS nombreCliente, IFNULL(usuarios.usuario, 'NO ENCONTRADO') AS nombreUsuario 
+	$sentencia = "SELECT ventas.id, ventas.fecha, ventas.total, ventas.terminos, ventas.observacion, ventas.impuesto, ventas.pagado, IFNULL(clientes.nombre, 'MOSTRADOR') AS nombreCliente, IFNULL(usuarios.usuario, 'NO ENCONTRADO') AS nombreUsuario 
 		FROM ventas
 		LEFT JOIN clientes ON clientes.id = ventas.idCliente
 		LEFT JOIN usuarios ON usuarios.id = ventas.idUsuario
@@ -298,8 +313,8 @@ function vender($venta){
 }
 
 function agregarCuentaApartado($venta){
-	$sentencia = "INSERT INTO cuentas_apartados (fecha, total, pagado, porPagar, tipo, idCliente, idUsuario, descuento, terminos, observacion) VALUES (?,?,?,?,?,?,?,?,?,?)";
-	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->pagado, $venta->porPagar, $venta->tipo, $venta->cliente, $venta->usuario, $venta->descuento, $venta->terminos, $venta->observacion];
+	$sentencia = "INSERT INTO cuentas_apartados (fecha, total, pagado, porPagar, tipo, idCliente, idUsuario, descuento, terminos, observacion, impuesto) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->pagado, $venta->porPagar, $venta->tipo, $venta->cliente, $venta->usuario, $venta->descuento, $venta->terminos, $venta->observacion, $venta->impuesto];
 
 	$registrado = insertar($sentencia, $parametros);
 	
@@ -312,8 +327,8 @@ function agregarCuentaApartado($venta){
 }
 
 function agregarCotizacion($venta){
-	$sentencia = "INSERT INTO cotizaciones(fecha, total, idCliente, idUsuario, descuento, terminos, observacion) VALUES (?,?,?,?,?,?,?)";
-	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->cliente, $venta->usuario, $venta->descuento, $venta->terminos, $venta->observacion];
+	$sentencia = "INSERT INTO cotizaciones(fecha, total, idCliente, idUsuario, descuento, terminos, observacion, impuesto) VALUES (?,?,?,?,?,?,?,?)";
+	$parametros = [date("Y-m-d H:i:s"), $venta->total, $venta->cliente, $venta->usuario, $venta->descuento, $venta->terminos, $venta->observacion, $venta->impuesto];
 
 	$registrado = insertar($sentencia, $parametros);
 	$idCotizacion =  obtenerUltimoId('cotizaciones');

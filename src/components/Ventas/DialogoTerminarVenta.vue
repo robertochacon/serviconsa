@@ -15,9 +15,18 @@
 					<b-input step="any" ref="pagado" icon="currency-usd" type="number" placeholder="Monto pagado" v-model="pagado" @input="calcularCambio" @keyup.enter.native="terminarVenta" size="is-medium"></b-input>
 				</b-field>
 				<p class="is-size-1 has-text-weight-bold">Cambio ${{ cambio + descuento }}</p>
-				<b-field label="Descuento" >
-					<b-input step="any" ref="descuento" icon="currency-usd" type="number" placeholder="Descuento" v-model="descuento" size="is-medium"></b-input>
-				</b-field>
+				<div class="columns">
+					<div class="column is-6">
+						<b-field label="Descuento" >
+							<b-input step="any" ref="descuento" icon="currency-usd" type="number" placeholder="Descuento" v-model="descuento" size="is-medium"></b-input>
+						</b-field>
+					</div>
+					<div class="column is-6">
+						<b-field label="Aplicar impuesto">
+							<b-switch v-model="impuesto"></b-switch>
+						</b-field>
+					</div>
+				</div>
 				<b-field label="Terminos" >
 					<textarea name="terminos" cols="30" placeholder="Terminos" v-model="terminos" rows="20" class="input is-medium" ></textarea>
 				</b-field>
@@ -54,6 +63,7 @@
 			cambio: 0,
 			cliente: {},
 			descuento: 0,
+			impuesto: 0,
 			terminos: '',
 			observacion: ''
 		}),
@@ -90,6 +100,7 @@
 					cambio: this.cambio+this.descuento,
 					cliente: this.cliente,
 					descuento: this.descuento,
+					impuesto: this.impuesto,
 					terminos: this.terminos,
 					observacion: this.observacion
 				}

@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<b-button type="is-primary" size="is-medium" class="is-rounded" icon-left="plus" @click="agregarCategoria">
+		<b-button type="is-primary" size="is-medium" class="is-rounded" icon-left="plus" @click="agregarCategoria" style="margin-bottom:10px;">
 			Agregar gasto
 		</b-button>
 		<b-table
@@ -10,7 +10,7 @@
 		</b-table-column>
 
 		<b-table-column field="monto" label="Monto" sortable searchable v-slot="props">
-			{{ props.row.monto }}
+			{{ props.row.monto+'.00' }}
 		</b-table-column>
 
 		<b-table-column field="fecha" label="Fecha" sortable searchable v-slot="props">

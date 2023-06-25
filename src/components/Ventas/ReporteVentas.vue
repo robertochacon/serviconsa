@@ -121,6 +121,12 @@
 
             generarComprobante(venta){
                 this.mostrarComprobante = true
+                if(venta.impuesto){
+                    venta.impuesto_numero = (0.18*venta.total)
+                }else{
+                    venta.impuesto_numero = 0
+                }
+                venta.subtotal = venta.total - venta.impuesto_numero;
                 this.ventaSeleccionada = venta
             },
 
