@@ -10,7 +10,7 @@
         <busqueda-en-fecha @seleccionada="onBusquedaEnFecha"/>
         <mensaje-inicial class="mt-2" :titulo="'No se han encontrado cotizaciones :('" :subtitulo="'Aquí aparecerán las cotizaciones registradas'" v-if="cotizaciones.length<1"/>
         <div class="mt-2" v-if="cotizaciones.length>0">
-            <cartas-totales :totales="totalesGenerales" v-if="usuario == 'admin'" />
+            <!-- <cartas-totales :totales="totalesGenerales" v-if="usuario == 'admin'" /> -->
             <b-select v-model="perPage">
                 <option value="5">5 por página</option>
                 <option value="10">10 por página</option>
@@ -80,7 +80,7 @@
 <script>
     import BusquedaEnFecha from '../Extras/BusquedaEnFecha'
     import MensajeInicial from '../Extras/MensajeInicial'
-    import CartasTotales from '../Extras/CartasTotales'
+    // import CartasTotales from '../Extras/CartasTotales'
     import TablaProductosVendidos from './TablaProductosVendidos'
     import ComprobanteCompra from './ComprobanteCompra'
     import HttpService from '../../Servicios/HttpService'
@@ -88,7 +88,7 @@
 
     export default {
         name: "ReporteCotizaciones",
-        components: { BusquedaEnFecha, MensajeInicial, CartasTotales, TablaProductosVendidos, ComprobanteCompra },
+        components: { BusquedaEnFecha, MensajeInicial, TablaProductosVendidos, ComprobanteCompra },
 
         data:()=>({
             usuario: "",

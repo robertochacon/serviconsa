@@ -98,7 +98,7 @@
                    total += parseFloat(producto.cantidad * producto.precio) - parseFloat(producto.cantidad * producto.precioCompra)
                })
            })
-           return total
+           return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(total)
        },
 
        calcularProductosVendidos(ventas) {
@@ -108,7 +108,7 @@
                    total += parseFloat(producto.cantidad)
                })
            })
-           return total
+           return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(total)
        },
 
        regresarRuta() {

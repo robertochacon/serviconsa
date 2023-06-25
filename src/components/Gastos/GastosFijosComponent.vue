@@ -10,7 +10,7 @@
 		</b-table-column>
 
 		<b-table-column field="monto" label="Monto" sortable searchable v-slot="props">
-			{{ props.row.monto+'.00' }}
+			{{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.monto,2) }}
 		</b-table-column>
 
 		<b-table-column field="fecha" label="Fecha" sortable searchable v-slot="props">

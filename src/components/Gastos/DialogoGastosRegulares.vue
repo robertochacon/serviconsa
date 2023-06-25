@@ -40,7 +40,7 @@
 			datosGasto:{
 				descripcion: "",
 				monto: 0,
-				fijo: 1,
+				fijo: 0,
 			}
 		}),
 

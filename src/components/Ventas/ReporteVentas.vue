@@ -49,15 +49,15 @@
                 </b-table-column>
 
                 <b-table-column field="pagado" label="Pago" sortable v-slot="props">
-                    ${{ props.row.pagado }}
+                    ${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.pagado) }}
                 </b-table-column>
 
                 <b-table-column field="Cambio" label="Cambio" sortable v-slot="props">
-                    ${{ props.row.pagado - props.row.total }}
+                    ${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.pagado - props.row.total,2) }}
                 </b-table-column>
 
                 <b-table-column field="total" label="Total" sortable  v-slot="props">
-                    <b>${{ props.row.total }}</b>
+                    <b>${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.total,2) }}</b>
                 </b-table-column>
 
                 <b-table-column field="productos" label="Productos" sortable  v-slot="props">

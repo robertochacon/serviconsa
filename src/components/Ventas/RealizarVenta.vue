@@ -6,7 +6,7 @@
       <tabla-productos :listaProductos="productos" @quitar="onQuitar" @aumentar="onAumentar"  />
       <div class="notification is-dark mt-3">
         <p class=" has-text-weight-bold has-text-centered" style="font-size:5em">
-          Total ${{ total }}
+          Total ${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(total,2) }}
         </p>
         <nav class="level mt-2">
           <div class="level-item has-text-centered">

@@ -89,48 +89,48 @@ function obtenerTotalesVentasPorMes($anio){
 
 function calcularTotalIngresos(){
 	$sentencia = "SELECT (SELECT SUM(total) FROM ventas) + (SELECT SUM(pagado) FROM cuentas_apartados) AS totalIngresos";
-	return selectRegresandoObjeto($sentencia)->totalIngresos;
+	return number_format(selectRegresandoObjeto($sentencia)->totalIngresos,2);
 }
 
 function calcularTotalIngresosHoy(){
 	$sentencia = "SELECT 
 	(SELECT IFNULL(SUM(total),0) FROM ventas WHERE DATE(fecha) = CURDATE()) + 
 	(SELECT IFNULL(SUM(pagado),0) FROM cuentas_apartados WHERE DATE(fecha) = CURDATE()) AS totalIngresos";
-	return selectRegresandoObjeto($sentencia)->totalIngresos;
+	return number_format(selectRegresandoObjeto($sentencia)->totalIngresos,2);
 }
 
 function calcularTotalIngresosSemana(){
 	$sentencia = "SELECT 
 	(SELECT IFNULL(SUM(total),0) FROM ventas WHERE WEEK(fecha) = WEEK(NOW())) + 
 	(SELECT IFNULL(SUM(pagado),0) FROM cuentas_apartados WHERE WEEK(fecha) = WEEK(NOW())) AS totalIngresos";
-	return selectRegresandoObjeto($sentencia)->totalIngresos;
+	return number_format(selectRegresandoObjeto($sentencia)->totalIngresos,2);
 }
 
 function calcularTotalIngresosMes(){
 	$sentencia = "SELECT 
 	(SELECT IFNULL(SUM(total),0) FROM ventas WHERE MONTH(fecha) = MONTH(CURRENT_DATE()) AND YEAR(fecha) = YEAR(CURRENT_DATE())) + 
 	(SELECT IFNULL(SUM(pagado),0) FROM cuentas_apartados WHERE MONTH(fecha) = MONTH(CURRENT_DATE()) AND YEAR(fecha) = YEAR(CURRENT_DATE())) AS totalIngresos";
-	return selectRegresandoObjeto($sentencia)->totalIngresos;
+	return number_format(selectRegresandoObjeto($sentencia)->totalIngresos,2);
 }
 
 function calcularIngresosPendientes(){
 	$sentencia = "SELECT IFNULL(SUM(porPagar), 0) AS pendientes FROM cuentas_apartados";
-	return selectRegresandoObjeto($sentencia)->pendientes;
+	return number_format(selectRegresandoObjeto($sentencia)->pendientes,2);
 }
 
 function calcularTotalIngresosGastos(){
-	$sentencia = "SELECT MONTH(fecha) as fecha, SUM(monto) FROM gastos WHERE fijo = 0 GROUP BY MONTH(fecha) ORDER BY id ASC";
-	return selectRegresandoObjeto($sentencia)->totalIngresos;
+	$sentencia = "SELECT MONTH(fecha) as fecha, SUM(monto) as total FROM gastos WHERE fijo = 0 GROUP BY MONTH(fecha) ORDER BY id ASC";
+	return number_format(selectRegresandoObjeto($sentencia)->total,2);
 }
 
 function calcularTotalIngresosGastosFijos(){
-	$sentencia = "SELECT SUM(monto) FROM gastos WHERE fijo = 1 ORDER BY id ASC";
-	return selectRegresandoObjeto($sentencia)->totalIngresos;
+	$sentencia = "SELECT SUM(monto) as total FROM gastos WHERE fijo = 1 ORDER BY id ASC";
+	return number_format(selectRegresandoObjeto($sentencia)->total,2);
 }
 
 function calcularTotalIngresosRentaEquipos(){
-	$sentencia = "SELECT SUM(costo) FROM renta_equipo";
-	return selectRegresandoObjeto($sentencia)->totalIngresos;
+	$sentencia = "SELECT SUM(costo) as total FROM renta_equipo";
+	return number_format(selectRegresandoObjeto($sentencia)->total,2);
 }
 
 function eliminarCotizacion($id){
@@ -166,7 +166,7 @@ function obtenerTotalVentas($filtros){
 	$fechaFin = ($filtros->fechaFin === "") ? FECHA_HOY : $filtros->fechaFin;
 	$sentencia = "SELECT SUM(total) AS totalVentas FROM ventas WHERE DATE(ventas.fecha) >= ? AND  DATE(ventas.fecha) <= ?";
 	$parametros = [$fechaInicio, $fechaFin];
-	return selectRegresandoObjeto($sentencia, $parametros)->totalVentas;
+	return number_format(selectRegresandoObjeto($sentencia, $parametros)->totalVentas,2);
 }
 
 function obtenerTotalCuentasApartados($filtros, $tipo){
@@ -177,7 +177,7 @@ function obtenerTotalCuentasApartados($filtros, $tipo){
 		array_push($parametros, $filtros->fechaInicio);
 		array_push($parametros, $filtros->fechaFin);
 	}
-	return selectRegresandoObjeto($sentencia, $parametros)->total;
+	return number_format(selectRegresandoObjeto($sentencia, $parametros)->total,2);
 }
 
 function obtenerTotalPorPagarCuentasApartados($filtros, $tipo){
@@ -189,7 +189,7 @@ function obtenerTotalPorPagarCuentasApartados($filtros, $tipo){
 		array_push($parametros, $filtros->fechaInicio);
 		array_push($parametros, $filtros->fechaFin);
 	}
-	return selectRegresandoObjeto($sentencia, $parametros)->porPagar;
+	return number_format(selectRegresandoObjeto($sentencia, $parametros)->porPagar,2);
 }
 
 function obtenerPagosCuentasApartados($filtros, $tipo){
@@ -200,7 +200,7 @@ function obtenerPagosCuentasApartados($filtros, $tipo){
 		array_push($parametros, $filtros->fechaInicio);
 		array_push($parametros, $filtros->fechaFin);
 	}
-	return selectRegresandoObjeto($sentencia, $parametros)->totalPagos;
+	return number_format(selectRegresandoObjeto($sentencia, $parametros)->totalPagos,2);
 }
 
 function obtenerCuentasApartados($filtros, $tipo){
@@ -386,7 +386,7 @@ function calcularTotalIngresosUsuario($idUsuario){
 	(SELECT IFNULL(SUM(total),0) FROM ventas WHERE idUsuario = ?) + 
 	(SELECT IFNULL(SUM(pagado),0) FROM cuentas_apartados WHERE idUsuario = ?) AS totalIngresos";
 	$parametros = [$idUsuario, $idUsuario];
-	return selectRegresandoObjeto($sentencia, $parametros)->totalIngresos;
+	return number_format(selectRegresandoObjeto($sentencia, $parametros)->totalIngresos,2);
 }
 
 function calcularTotalIngresosHoyUsuario($idUsuario){
@@ -394,7 +394,7 @@ function calcularTotalIngresosHoyUsuario($idUsuario){
 	(SELECT IFNULL(SUM(total),0) FROM ventas WHERE DATE(fecha) = CURDATE() AND idUsuario = ?) + 
 	(SELECT IFNULL(SUM(pagado),0) FROM cuentas_apartados WHERE DATE(fecha) = CURDATE() AND idUsuario = ?) AS totalIngresos";
 	$parametros = [$idUsuario, $idUsuario];
-	return selectRegresandoObjeto($sentencia, $parametros)->totalIngresos;
+	return number_format(selectRegresandoObjeto($sentencia, $parametros)->totalIngresos,2);
 }
 
 function calcularTotalIngresosSemanaUsuario($idUsuario){
@@ -402,7 +402,7 @@ function calcularTotalIngresosSemanaUsuario($idUsuario){
 	(SELECT IFNULL(SUM(total),0) FROM ventas WHERE WEEK(fecha) = WEEK(NOW()) AND idUsuario = ?) + 
 	(SELECT IFNULL(SUM(pagado),0) FROM cuentas_apartados WHERE WEEK(fecha) = WEEK(NOW()) AND idUsuario = ?) AS totalIngresos";
 	$parametros = [$idUsuario, $idUsuario];
-	return selectRegresandoObjeto($sentencia, $parametros)->totalIngresos;
+	return number_format(selectRegresandoObjeto($sentencia, $parametros)->totalIngresos,2);
 }
 
 function calcularTotalIngresosMesUsuario($idUsuario){
@@ -410,7 +410,7 @@ function calcularTotalIngresosMesUsuario($idUsuario){
 	(SELECT IFNULL(SUM(total),0) FROM ventas WHERE MONTH(fecha) = MONTH(CURRENT_DATE()) AND YEAR(fecha) = YEAR(CURRENT_DATE()) AND idUsuario = ?) + 
 	(SELECT IFNULL(SUM(pagado),0) FROM cuentas_apartados WHERE MONTH(fecha) = MONTH(CURRENT_DATE()) AND YEAR(fecha) = YEAR(CURRENT_DATE()) AND idUsuario = ?) AS totalIngresos";
 	$parametros = [$idUsuario, $idUsuario];
-	return selectRegresandoObjeto($sentencia, $parametros)->totalIngresos;
+	return number_format(selectRegresandoObjeto($sentencia, $parametros)->totalIngresos,2);
 }
 
 function obtenerVentasPorUsuario(){
@@ -570,12 +570,12 @@ function restarExistenciaProducto($cantidad, $id){
 
 function calcularGananciaInventario(){
 	$sentencia = "SELECT SUM((precioVenta * existencia)-(precioCompra * existencia)) AS gananciaInventario FROM productos";
-	return selectRegresandoObjeto($sentencia)->gananciaInventario;
+	return number_format(selectRegresandoObjeto($sentencia)->gananciaInventario,2);
 }
 
 function calcularTotalInventario(){
 	$sentencia = "SELECT SUM(precioVenta * existencia) AS totalInventario FROM productos";
-	return selectRegresandoObjeto($sentencia)->totalInventario;
+	return number_format(selectRegresandoObjeto($sentencia)->totalInventario,2);
 }
 
 function calcularNumeroTotalProductos(){

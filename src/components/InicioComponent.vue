@@ -265,9 +265,9 @@
                         {nombre: "Ingresos semana", total: '$' + ingresos.ingresosSemana, icono: "calendar-range", clase: "has-text-info"},
                         {nombre: "Ingresos mes", total: '$' + ingresos.ingresosMes, icono: "calendar-month", clase: "has-text-dark"},
                         {nombre: "Ingresos pendientes", total: '$' + ingresos.ingresosPendientes, icono: "alert", clase: "has-text-danger"},
-                        {nombre: "Total gastos del mes", total: '$' + ingresos.totalGastos, icono: "alert", clase: "has-text-warning"},
-                        {nombre: "Total gastos fijos del mes", total: '$' + ingresos.totalGastosFijos, icono: "alert", clase: "has-text-warning"},
-                        {nombre: "Ingresos pendientes", total: '$' + ingresos.totalRentaEquipos, icono: "alert", clase: "has-text-warning"},
+                        {nombre: "Gastos del mes", total: '$' + ingresos.totalGastos, icono: "currency-usd", clase: "has-text-success"},
+                        {nombre: "Gastos fijos del mes", total: '$' + ingresos.totalGastosFijos, icono: "currency-usd", clase: "has-text-success"},
+                        {nombre: "Renta de equipos", total: '$' + ingresos.totalRentaEquipos, icono: "currency-usd", clase: "has-text-success"},
                     ]
             },
 

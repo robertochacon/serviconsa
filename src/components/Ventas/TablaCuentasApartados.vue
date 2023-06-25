@@ -38,15 +38,15 @@
             </b-table-column>
 
             <b-table-column field="pagado" label="Pago" sortable v-slot="props" >
-                <span class="has-text-info has-text-weight-bold">${{ props.row.pagado }}</span>
+                <span class="has-text-info has-text-weight-bold">${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.pagado,2) }}</span>
             </b-table-column>
 
             <b-table-column field="porPagar" label="Por pagar" sortable v-slot="props" >
-                <span class="has-text-danger has-text-weight-bold"> ${{ props.row.porPagar }}</span>
+                <span class="has-text-danger has-text-weight-bold"> ${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.porPagar,2) }}</span>
             </b-table-column>
 
             <b-table-column field="total" label="Total" sortable  v-slot="props">
-                <b>${{ props.row.total }}</b>
+                <b>${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.total,2) }}</b>
             </b-table-column>
 
             <b-table-column field="productos" label="Productos" sortable  v-slot="props">

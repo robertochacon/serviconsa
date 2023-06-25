@@ -12,7 +12,7 @@
 			</b-table-column>
 
 			<b-table-column field="costo" label="Costo" sortable searchable v-slot="props">
-				{{ props.row.costo }}
+				{{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.costo,2) }}
 			</b-table-column>
 
 			<b-table-column field="estado" label="Estado" sortable searchable v-slot="props">

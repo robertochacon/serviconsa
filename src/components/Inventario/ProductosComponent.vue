@@ -45,15 +45,15 @@
                 </b-table-column>
 
                 <b-table-column field="precioCompra" label="Precio compra" sortable v-slot="props">
-                    ${{ props.row.precioCompra }}
+                    ${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.precioCompra,2) }}
                 </b-table-column>
 
                 <b-table-column field="precioVenta" label="Precio venta" sortable v-slot="props">
-                    ${{ props.row.precioVenta }}
+                    ${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.precioVenta,2) }}
                 </b-table-column>
 
                 <b-table-column field="ganancia" label="Ganacia" sortable v-slot="props">
-                    <b>${{ props.row.precioVenta - props.row.precioCompra }}</b>
+                    <b>${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.precioVenta - props.row.precioCompra,2) }}</b>
                 </b-table-column>
 
                 <b-table-column field="vendidoMayoreo" label="¿Mayoreo?" sortable v-slot="props">

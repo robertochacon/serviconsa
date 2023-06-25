@@ -7,7 +7,7 @@
 			</b-table-column>
 
 			<b-table-column field="precio" label="Precio" v-slot="props">
-				${{ props.row.precio }}
+				${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.precio,2) }}
 			</b-table-column>
 
 			<b-table-column field="cantidad" label="Cantidad" v-slot="props">
@@ -15,7 +15,7 @@
 			</b-table-column>
 
 			<b-table-column field="subtotal" label="Subtotal" v-slot="props">
-				<b>${{ props.row.precio * props.row.cantidad }}</b>
+				<b>${{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(props.row.precio * props.row.cantidad,2) }}</b>
 			</b-table-column>
 		</b-table>
 </template>
