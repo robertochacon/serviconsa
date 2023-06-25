@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2023 at 10:56 AM
+-- Generation Time: Jun 25, 2023 at 06:56 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -84,7 +84,7 @@ CREATE TABLE `configuracion` (
 --
 
 INSERT INTO `configuracion` (`nombre`, `telefono`, `logo`) VALUES
-('Serviconsa', '00000000', './logos/logo.png');
+('Serviconsa', '8498517880', './logos/logo.png');
 
 -- --------------------------------------------------------
 
@@ -100,24 +100,19 @@ CREATE TABLE `cotizaciones` (
   `idUsuario` bigint(20) NOT NULL,
   `descuento` int(11) DEFAULT NULL,
   `terminos` text DEFAULT NULL,
-  `observacion` text DEFAULT NULL
+  `observacion` text DEFAULT NULL,
+  `impuesto` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cotizaciones`
 --
 
-INSERT INTO `cotizaciones` (`id`, `fecha`, `total`, `idCliente`, `idUsuario`, `descuento`, `terminos`, `observacion`) VALUES
-(1, '2022-07-03 16:33:23', 1162.00, 2, 1, NULL, NULL, NULL),
-(2, '2022-07-03 16:36:43', 1000.00, 1, 1, NULL, NULL, NULL),
-(4, '2022-07-06 14:33:04', 4518.00, 2, 1, NULL, NULL, NULL),
-(5, '2022-07-06 18:10:45', 1342.00, 2, 1, NULL, NULL, NULL),
-(6, '2022-08-01 09:54:23', 6594.00, 4, 1, NULL, NULL, NULL),
-(7, '2023-06-04 08:42:23', 1000.00, 1, 1, NULL, NULL, NULL),
-(8, '2023-06-04 09:39:23', 2000.00, 1, 1, NULL, NULL, NULL),
-(9, '2023-06-04 09:45:44', 950.00, 1, 1, NULL, NULL, NULL),
-(10, '2023-06-04 09:49:53', 1400.00, 1, 1, 600, NULL, NULL),
-(11, '2023-06-10 08:36:30', 20.00, 3, 1, 2, 'ijiji', 'ygyg');
+INSERT INTO `cotizaciones` (`id`, `fecha`, `total`, `idCliente`, `idUsuario`, `descuento`, `terminos`, `observacion`, `impuesto`) VALUES
+(27, '2023-06-25 09:30:21', 1180.00, 1, 1, 0, '', '', 1),
+(28, '2023-06-25 10:32:30', 1000.00, 1, 1, 0, 'todo good', 'observacion bien', 0),
+(29, '2023-06-25 10:33:01', 1180.00, 1, 1, 0, 'con impuestos', 'a ver', 1),
+(30, '2023-06-25 10:42:23', 1416.00, 5, 1, 0, 'a ver', 'a ver en observacion', 1);
 
 -- --------------------------------------------------------
 
@@ -136,24 +131,25 @@ CREATE TABLE `cuentas_apartados` (
   `idUsuario` bigint(20) NOT NULL,
   `descuento` int(11) DEFAULT NULL,
   `terminos` text DEFAULT NULL,
-  `observacion` text DEFAULT NULL
+  `observacion` text DEFAULT NULL,
+  `impuesto` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cuentas_apartados`
 --
 
-INSERT INTO `cuentas_apartados` (`id`, `fecha`, `total`, `pagado`, `porPagar`, `tipo`, `idCliente`, `idUsuario`, `descuento`, `terminos`, `observacion`) VALUES
-(1, '2022-06-25 17:30:03', 1000.00, 1000.00, 0.00, 'cuenta', 2, 1, NULL, NULL, NULL),
-(2, '2022-06-25 17:36:09', 1000.00, 1000.00, 0.00, 'apartado', 1, 1, NULL, NULL, NULL),
-(3, '2022-06-25 17:53:10', 1000.00, 900.00, 100.00, 'cuenta', 1, 1, NULL, NULL, NULL),
-(4, '2022-06-25 17:53:25', 1000.00, 1000.00, 0.00, 'apartado', 2, 1, NULL, NULL, NULL),
-(5, '2022-07-03 17:53:15', 22.00, 22.00, 0.00, 'cuenta', 1, 1, NULL, NULL, NULL),
-(6, '2022-07-03 18:13:16', 1000.00, 300.00, 700.00, 'apartado', 4, 1, NULL, NULL, NULL),
-(7, '2022-07-06 18:09:30', 300.00, 100.00, 200.00, 'cuenta', 2, 1, NULL, NULL, NULL),
-(8, '2022-07-06 18:10:14', 1022.00, 0.00, 1022.00, 'apartado', 4, 1, NULL, NULL, NULL),
-(9, '2023-06-10 08:44:25', 800.00, 100.00, 700.00, 'apartado', 3, 1, 200, 'ijii', 'ygyugyfg'),
-(10, '2023-06-10 08:51:50', 900.00, 700.00, 200.00, 'cuenta', 3, 1, 100, 'tf', 'ed');
+INSERT INTO `cuentas_apartados` (`id`, `fecha`, `total`, `pagado`, `porPagar`, `tipo`, `idCliente`, `idUsuario`, `descuento`, `terminos`, `observacion`, `impuesto`) VALUES
+(1, '2022-06-25 17:30:03', 1000.00, 1000.00, 0.00, 'cuenta', 2, 1, NULL, NULL, NULL, NULL),
+(2, '2022-06-25 17:36:09', 1000.00, 1000.00, 0.00, 'apartado', 1, 1, NULL, NULL, NULL, NULL),
+(3, '2022-06-25 17:53:10', 1000.00, 900.00, 100.00, 'cuenta', 1, 1, NULL, NULL, NULL, NULL),
+(4, '2022-06-25 17:53:25', 1000.00, 1000.00, 0.00, 'apartado', 2, 1, NULL, NULL, NULL, NULL),
+(5, '2022-07-03 17:53:15', 22.00, 22.00, 0.00, 'cuenta', 1, 1, NULL, NULL, NULL, NULL),
+(6, '2022-07-03 18:13:16', 1000.00, 300.00, 700.00, 'apartado', 4, 1, NULL, NULL, NULL, NULL),
+(7, '2022-07-06 18:09:30', 300.00, 100.00, 200.00, 'cuenta', 2, 1, NULL, NULL, NULL, NULL),
+(8, '2022-07-06 18:10:14', 1022.00, 0.00, 1022.00, 'apartado', 4, 1, NULL, NULL, NULL, NULL),
+(9, '2023-06-10 08:44:25', 800.00, 100.00, 700.00, 'apartado', 3, 1, 200, 'ijii', 'ygyugyfg', NULL),
+(10, '2023-06-10 08:51:50', 900.00, 700.00, 200.00, 'cuenta', 3, 1, 100, 'tf', 'ed', NULL);
 
 -- --------------------------------------------------------
 
@@ -177,7 +173,11 @@ INSERT INTO `gastos` (`id`, `descripcion`, `monto`, `fijo`, `fecha`) VALUES
 (1, 'ejemplo', 200, 1, '2023-06-11 01:51:27'),
 (2, 'ok', 23, 0, '2023-06-11 10:41:12'),
 (4, 'nuevo', 400, 0, '2023-06-11 10:45:12'),
-(6, 'otro', 34, 0, '2023-06-11 10:54:30');
+(6, 'otro', 34, 0, '2023-06-11 10:54:30'),
+(9, 'ejemplo', 2000, 1, '2023-06-25 09:41:36'),
+(10, 'Compra de comida', 1000, 1, '2023-06-25 17:52:57'),
+(11, 'pago de agua', 2000, 0, '2023-06-25 17:53:32'),
+(12, 'compra de jugo', 2000, 0, '2023-06-25 17:55:00');
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `precioCompra`, `precioVenta`, `existencia`, `vendidoMayoreo`, `precioMayoreo`, `cantidadMayoreo`, `marca`, `categoria`) VALUES
-(1, '1321355155', 'Bocina', 500.00, 1000.00, 23, 0, 0.00, 0.00, 0, 0),
+(1, '1321355155', 'Bocina', 500.00, 1000.00, 20, 0, 0.00, 0.00, 0, 0),
 (2, '12123146556415', 'Libreta de Call of duty', 15.00, 22.00, 99, 0, 0.00, 0.00, 1, 1),
 (3, '113241564546', 'Cuaderno cosido ', 15.00, 22.00, 66, 1, 13.00, 10.00, 2, 1),
 (4, '1321354564', 'Lapiz bonito', 5.00, 10.00, 453, 1, 8.00, 20.00, 3, 2),
@@ -323,7 +323,30 @@ INSERT INTO `productos_vendidos` (`id`, `cantidad`, `precio`, `idProducto`, `idR
 (67, 1.00, 22.00, 2, 11, 'cotiza'),
 (68, 1.00, 1000.00, 1, 9, 'apartado'),
 (69, 1.00, 1000.00, 1, 10, 'cuenta'),
-(70, 1.00, 1000.00, 1, 18, 'venta');
+(70, 1.00, 1000.00, 1, 18, 'venta'),
+(71, 1.00, 1000.00, 1, 12, 'cotiza'),
+(72, 1.00, 1000.00, 1, 13, 'cotiza'),
+(73, 2.00, 1000.00, 1, 14, 'cotiza'),
+(74, 1.00, 1000.00, 1, 15, 'cotiza'),
+(75, 1.00, 1000.00, 1, 16, 'cotiza'),
+(76, 1.00, 1000.00, 1, 17, 'cotiza'),
+(77, 1.00, 1000.00, 1, 18, 'cotiza'),
+(78, 1.00, 1000.00, 1, 19, 'cotiza'),
+(79, 1.00, 1000.00, 1, 20, 'cotiza'),
+(80, 1.00, 1000.00, 1, 21, 'cotiza'),
+(81, 1.00, 1000.00, 1, 22, 'cotiza'),
+(82, 1.00, 100.00, 6, 23, 'cotiza'),
+(83, 1.00, 1000.00, 1, 24, 'cotiza'),
+(84, 1.00, 1000.00, 1, 25, 'cotiza'),
+(85, 1.00, 1000.00, 1, 26, 'cotiza'),
+(86, 1.00, 1000.00, 1, 27, 'cotiza'),
+(87, 1.00, 1000.00, 1, 19, 'venta'),
+(88, 1.00, 1000.00, 1, 20, 'venta'),
+(89, 1.00, 1000.00, 1, 28, 'cotiza'),
+(90, 1.00, 1000.00, 1, 29, 'cotiza'),
+(91, 1.00, 1000.00, 1, 30, 'cotiza'),
+(92, 1.00, 200.00, 7, 30, 'cotiza'),
+(93, 1.00, 1000.00, 1, 21, 'venta');
 
 -- --------------------------------------------------------
 
@@ -405,32 +428,34 @@ CREATE TABLE `ventas` (
   `idUsuario` bigint(20) NOT NULL,
   `descuento` int(11) DEFAULT NULL,
   `terminos` text DEFAULT NULL,
-  `observacion` text DEFAULT NULL
+  `observacion` text DEFAULT NULL,
+  `impuesto` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `fecha`, `total`, `pagado`, `idCliente`, `idUsuario`, `descuento`, `terminos`, `observacion`) VALUES
-(1, '2022-06-25 17:30:52', 42.00, 50.00, 0, 1, NULL, NULL, NULL),
-(2, '2022-06-25 17:52:56', 32.00, 50.00, 0, 1, NULL, NULL, NULL),
-(3, '2022-06-28 13:38:54', 32.00, 50.00, 0, 1, NULL, NULL, NULL),
-(4, '2022-06-28 14:48:09', 1000.00, 1000.00, 1, 1, NULL, NULL, NULL),
-(5, '2022-07-01 16:43:50', 22.00, 30.00, 0, 1, NULL, NULL, NULL),
-(6, '2022-07-01 17:25:46', 110.00, 200.00, 0, 1, NULL, NULL, NULL),
-(7, '2022-07-02 18:05:34', 195.00, 200.00, 0, 1, NULL, NULL, NULL),
-(8, '2022-07-02 18:15:48', 22.00, 50.00, 0, 1, NULL, NULL, NULL),
-(9, '2022-07-02 18:18:22', 22.00, 50.00, 0, 1, NULL, NULL, NULL),
-(10, '2022-07-06 14:57:27', 640.00, 1000.00, 0, 1, NULL, NULL, NULL),
-(11, '2022-07-06 17:56:18', 64.00, 100.00, 0, 1, NULL, NULL, NULL),
-(12, '2022-07-06 17:59:02', 332.00, 332.00, 0, 1, NULL, NULL, NULL),
-(13, '2022-07-06 17:59:27', 200.00, 200.00, 2, 2, NULL, NULL, NULL),
-(14, '2022-07-06 18:09:03', 100.00, 100.00, 0, 2, NULL, NULL, NULL),
-(15, '2022-07-15 13:20:43', 66.00, 100.00, 0, 1, NULL, NULL, NULL),
-(16, '2022-07-15 16:41:45', 42.00, 50.00, 4, 1, NULL, NULL, NULL),
-(17, '2022-07-15 16:43:23', 132.00, 500.00, 0, 5, NULL, NULL, NULL),
-(18, '2023-06-10 08:59:39', 900.00, 2000.00, 3, 1, 100, 'ygy', 'hyh');
+INSERT INTO `ventas` (`id`, `fecha`, `total`, `pagado`, `idCliente`, `idUsuario`, `descuento`, `terminos`, `observacion`, `impuesto`) VALUES
+(1, '2022-06-25 17:30:52', 42.00, 50.00, 0, 1, NULL, NULL, NULL, NULL),
+(2, '2022-06-25 17:52:56', 32.00, 50.00, 0, 1, NULL, NULL, NULL, NULL),
+(3, '2022-06-28 13:38:54', 32.00, 50.00, 0, 1, NULL, NULL, NULL, NULL),
+(4, '2022-06-28 14:48:09', 1000.00, 1000.00, 1, 1, NULL, NULL, NULL, NULL),
+(5, '2022-07-01 16:43:50', 22.00, 30.00, 0, 1, NULL, NULL, NULL, NULL),
+(6, '2022-07-01 17:25:46', 110.00, 200.00, 0, 1, NULL, NULL, NULL, NULL),
+(7, '2022-07-02 18:05:34', 195.00, 200.00, 0, 1, NULL, NULL, NULL, NULL),
+(8, '2022-07-02 18:15:48', 22.00, 50.00, 0, 1, NULL, NULL, NULL, NULL),
+(9, '2022-07-02 18:18:22', 22.00, 50.00, 0, 1, NULL, NULL, NULL, NULL),
+(10, '2022-07-06 14:57:27', 640.00, 1000.00, 0, 1, NULL, NULL, NULL, NULL),
+(11, '2022-07-06 17:56:18', 64.00, 100.00, 0, 1, NULL, NULL, NULL, NULL),
+(12, '2022-07-06 17:59:02', 332.00, 332.00, 0, 1, NULL, NULL, NULL, NULL),
+(13, '2022-07-06 17:59:27', 200.00, 200.00, 2, 2, NULL, NULL, NULL, NULL),
+(14, '2022-07-06 18:09:03', 100.00, 100.00, 0, 2, NULL, NULL, NULL, NULL),
+(15, '2022-07-15 13:20:43', 66.00, 100.00, 0, 1, NULL, NULL, NULL, NULL),
+(16, '2022-07-15 16:41:45', 42.00, 50.00, 4, 1, NULL, NULL, NULL, NULL),
+(17, '2022-07-15 16:43:23', 132.00, 500.00, 0, 5, NULL, NULL, NULL, NULL),
+(18, '2023-06-10 08:59:39', 900.00, 2000.00, 3, 1, 100, 'ygy', 'hyh', NULL),
+(21, '2023-06-25 17:11:06', 1180.00, 1000.00, 0, 1, 0, '', '', NULL);
 
 --
 -- Indexes for dumped tables
@@ -528,7 +553,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT for table `cotizaciones`
 --
 ALTER TABLE `cotizaciones`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `cuentas_apartados`
@@ -540,7 +565,7 @@ ALTER TABLE `cuentas_apartados`
 -- AUTO_INCREMENT for table `gastos`
 --
 ALTER TABLE `gastos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `marcas`
@@ -558,7 +583,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `productos_vendidos`
 --
 ALTER TABLE `productos_vendidos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `renta_equipo`
@@ -582,7 +607,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
